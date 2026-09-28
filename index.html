@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GirlsGX | 18+</title>
+  <style>
+    :root {
+      --bg: #0f0a0d;
+      --card: #1a1216;
+      --accent: #f9a8d4;
+      --accent-soft: #f472b6;
+      --accent-deep: #ec4899;
+      --text: #fdf2f8;
+      --muted: #d8b4c8;
+      --border: #3b2433;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* ===== AGE GATE ===== */
+    #age-gate {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      backdrop-filter: blur(8px);
+    }
+
+    .age-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+    }
+
+    .age-box h2 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      color: var(--accent);
+    }
+
+    .age-box p {
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .age-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s ease;
+    }
+
+    .btn-yes {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-yes:hover {
+      background: var(--accent-soft);
+      transform: translateY(-2px);
+    }
+
+    .btn-no {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .btn-no:hover {
+      border-color: var(--muted);
+      color: var(--text);
+    }
+
+
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(249,168,212,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 20%, #f9a8d4 60%, #f472b6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.15rem;
+      max-width: 540px;
+      margin: 0 auto 32px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(249,168,212,0.18);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+
+
+    /* ===== COVER ===== */
+    .covers-row {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+
+    .cover-wrap {
+      position: relative;
+      flex: 1 1 280px;
+      max-width: 420px;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--card);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .cover-wrap:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(244, 114, 182, 0.25);
+    }
+
+    .cover-img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .cover-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15,10,13,0.75) 0%, transparent 45%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 28px;
+      opacity: 0.9;
+      transition: opacity 0.3s;
+    }
+
+    .cover-wrap:hover .cover-overlay {
+      opacity: 1;
+    }
+
+    .cover-play {
+      background: rgba(249, 168, 212, 0.95);
+      color: #1a1216;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 12px 28px;
+      border-radius: 999px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ===== GALLERY ===== */
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      padding-bottom: 80px;
+    }
+
+    .card {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--card);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      aspect-ratio: 3/4;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.04);
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+    }
+
+    .card:hover .card-overlay {
+      opacity: 1;
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .card-meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    /* ===== LIGHTBOX ===== */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.97);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 0;
+      overflow: auto;
+    }
+
+    #lightbox.active {
+      display: flex;
+    }
+
+    #lightbox img {
+      max-width: 96vw;
+      max-height: 92vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 0 50px rgba(0,0,0,0.7);
+      display: block;
+      image-rendering: auto;
+    }
+
+    .lb-nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.55);
+      border: none;
+      color: white;
+      font-size: 2.4rem;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 2002;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      line-height: 1;
+    }
+
+    .lb-nav:hover {
+      background: rgba(244, 114, 182, 0.85);
+    }
+
+    .lb-prev { left: 16px; }
+    .lb-next { right: 16px; }
+
+    .lb-counter {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.95rem;
+      background: rgba(0,0,0,0.5);
+      padding: 6px 16px;
+      border-radius: 999px;
+      z-index: 2002;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      background: rgba(0,0,0,0.6);
+      border: none;
+      color: white;
+      font-size: 2.4rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      opacity: 0.9;
+      transition: opacity 0.2s, background 0.2s;
+      z-index: 2001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .lightbox-close:hover {
+      opacity: 1;
+      background: rgba(244,114,182,0.85);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+      .hero {
+        padding: 40px 0 28px;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .covers-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+      .cover-wrap {
+        max-width: 100%;
+        width: 100%;
+      }
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .section-title {
+        font-size: 1.3rem;
+      }
+      .lb-nav {
+        width: 42px;
+        height: 42px;
+        font-size: 1.8rem;
+      }
+      .lb-prev { left: 8px; }
+      .lb-next { right: 8px; }
+      .lightbox-close {
+        top: 12px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.8rem;
+      }
+      #lightbox img {
+        max-width: 100vw;
+        max-height: 85vh;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .age-box {
+        padding: 28px 20px;
+      }
+      .age-btns {
+        flex-direction: column;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AGE GATE -->
+  <div id="age-gate">
+    <div class="age-box">
+      <h2>18+</h2>
+      <p>Этот сайт содержит материалы для взрослых.<br>Вам уже исполнилось 18 лет?</p>
+      <div class="age-btns">
+        <button class="btn btn-yes" onclick="enterSite()">Да, мне есть 18</button>
+        <button class="btn btn-no" onclick="leaveSite()">Нет</button>
+      </div>
+    </div>
+  </div>
+
+<!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="badge">ТОЛЬКО 18+</div>
+      <h1>GirlsGX</h1>
+
+    </div>
+  </section>
+
+  <!-- FEATURED ALBUMS (side by side) -->
+  <section class="container" id="featured">
+    <div class="covers-row">
+      <div class="cover-wrap" id="cover-btn">
+        <img src="images/450px_21.webp" alt="Album 1" class="cover-img">
+        <div class="cover-overlay">
+          <span class="cover-play">Открыть галерею</span>
+        </div>
+      </div>
+      <div class="cover-wrap" id="cover-btn2">
+        <img src="images/album2/01.webp" alt="Album 2" class="cover-img">
+        <div class="cover-overlay">
+          <span class="cover-play">Открыть галерею</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL GALLERY -->
+  <section class="container" id="gallery">
+    <h2 class="section-title">Галерея</h2>
+    <div class="gallery" id="gallery-grid"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2026 GirlsGX. Все права защищены.</p>
+      <p style="margin-top: 8px;">Связаться с нами: <a href="mailto:lortan16@gmail.com">lortan16@gmail.com</a></p>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">×</button>
+    <button class="lb-nav lb-prev" onclick="prevPhoto()">‹</button>
+    <button class="lb-nav lb-next" onclick="nextPhoto()">›</button>
+    <img id="lightbox-img" src="" alt="">
+    <div class="lb-counter" id="lb-counter"></div>
+  </div>
+
+  <script>
+    // ===== AGE GATE =====
+    function enterSite() {
+      document.getElementById('age-gate').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    function leaveSite() {
+      window.location.href = 'https://www.google.com';
+    }
+
+// ===== GALLERY DATA =====
+// ===== FEATURED ALBUM (9 photos) =====
+    const featuredPhotos = [
+      "images/450px_21.webp",
+      "images/450px_24.webp",
+      "images/450px_27.webp",
+      "images/450px_28.webp",
+      "images/450px_35.webp",
+      "images/450px_37.webp",
+      "images/450px_38.webp",
+      "images/450px_39.webp",
+      "images/450px_40.webp"
+    ];
+
+    const featuredPhotos2 = [
+      "images/album2/01.webp",
+      "images/album2/02.webp",
+      "images/album2/03.webp",
+      "images/album2/04.webp",
+      "images/album2/05.webp",
+      "images/album2/06.webp",
+      "images/album2/07.webp",
+      "images/album2/08.webp",
+      "images/album2/09.webp",
+      "images/album2/10.webp",
+      "images/album2/11.webp",
+      "images/album2/12.webp",
+      "images/album2/13.webp",
+      "images/album2/14.webp",
+      "images/album2/15.webp",
+      "images/album2/16.webp",
+      "images/album2/17.webp",
+      "images/album2/18.webp",
+      "images/album2/19.webp",
+      "images/album2/20.webp",
+      "images/album2/21.webp",
+      "images/album2/22.webp",
+      "images/album2/23.webp",
+      "images/album2/24.webp",
+      "images/album2/25.webp",
+      "images/album2/26.webp",
+      "images/album2/27.webp",
+      "images/album2/28.webp",
+      "images/album2/29.webp"
+    ];
+
+    // ===== FULL GALLERY (GirlsGX) =====
+    const allPhotos = [
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_d8a826226087445f93484b13fc642735~mv2.webp/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_d8a826226087445f93484b13fc642735~mv2.webp",
+        title: "Girl 1"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_3078b4d280364830a86fb0217d0406a2~mv2.webp/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_3078b4d280364830a86fb0217d0406a2~mv2.webp",
+        title: "Girl 2"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_1fa3967587e842ebb2b908609f747aaf~mv2.webp/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_1fa3967587e842ebb2b908609f747aaf~mv2.webp",
+        title: "Girl 3"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_e9a51168cda14ee69c825c42ce64b8a8~mv2.webp/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_e9a51168cda14ee69c825c42ce64b8a8~mv2.webp",
+        title: "Girl 4"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_53b85b24effc40b2a86458202337cb04~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_53b85b24effc40b2a86458202337cb04~mv2.jpg",
+        title: "Girl 5"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_73351662fd13403a9bc2d26731382852~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_73351662fd13403a9bc2d26731382852~mv2.jpg",
+        title: "Girl 6"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_4ab7c3ef7a7d43e2b3e00ffca18fced8~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_4ab7c3ef7a7d43e2b3e00ffca18fced8~mv2.jpg",
+        title: "Girl 7"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_f160de42696c4270adb6809fe8211662~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_f160de42696c4270adb6809fe8211662~mv2.jpg",
+        title: "Girl 8"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_f1cdf3faa80b4fd9883337d1c3bb761e~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_f1cdf3faa80b4fd9883337d1c3bb761e~mv2.jpg",
+        title: "Girl 9"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_8def13a23e314eb69f0c2b0bcd1b9541~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_8def13a23e314eb69f0c2b0bcd1b9541~mv2.jpg",
+        title: "Girl 10"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_ab63e8d894bc4d3ba3ca42134aed0b32~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_ab63e8d894bc4d3ba3ca42134aed0b32~mv2.jpg",
+        title: "Girl 11"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_677db18612294a8dbb516b87654f0830~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_677db18612294a8dbb516b87654f0830~mv2.jpg",
+        title: "Girl 12"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_7016e8d202a14f41bb9ec0ad70995809~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_7016e8d202a14f41bb9ec0ad70995809~mv2.jpg",
+        title: "Girl 13"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_46f218ffe2434908875ded8082f4233a~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_46f218ffe2434908875ded8082f4233a~mv2.jpg",
+        title: "Girl 14"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_5713d44016054eb8a1ca5c085d13338b~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_5713d44016054eb8a1ca5c085d13338b~mv2.jpg",
+        title: "Girl 15"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_f9962bc2a410422f852833d38081fe02~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_f9962bc2a410422f852833d38081fe02~mv2.jpg",
+        title: "Girl 16"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_0f78709ef44b4e28a73acb4be5a7758a~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_0f78709ef44b4e28a73acb4be5a7758a~mv2.jpg",
+        title: "Girl 17"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_71c2e5c0cbc54530947bf3cdc7384012~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_71c2e5c0cbc54530947bf3cdc7384012~mv2.jpg",
+        title: "Girl 18"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_f7c8d45cfcb8456fbeb08876a01e2c24~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_f7c8d45cfcb8456fbeb08876a01e2c24~mv2.jpg",
+        title: "Girl 19"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_e4510f8ffde44c2c8bded77c72213c1e~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_e4510f8ffde44c2c8bded77c72213c1e~mv2.jpg",
+        title: "Girl 20"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_547f959338d54b6f8093ba34665e12f4~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_547f959338d54b6f8093ba34665e12f4~mv2.jpg",
+        title: "Girl 21"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_0b8e5d4e33c94e47a880f0e111348983~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_0b8e5d4e33c94e47a880f0e111348983~mv2.jpg",
+        title: "Girl 22"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_8099b1724caa48b18202c3fae3429c8a~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_8099b1724caa48b18202c3fae3429c8a~mv2.jpg",
+        title: "Girl 23"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_ea342e820cfe437e887ebf453bf9fd3a~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_ea342e820cfe437e887ebf453bf9fd3a~mv2.jpg",
+        title: "Girl 24"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_64e60bea50664a4cb458fbdf0d7d8382~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_64e60bea50664a4cb458fbdf0d7d8382~mv2.jpg",
+        title: "Girl 25"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_509862c104ab47ba849082ff562db7f2~mv2.jpeg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_509862c104ab47ba849082ff562db7f2~mv2.jpeg",
+        title: "Girl 26"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_e3d0b7c3d23c4796955246344da15a3e~mv2.jpeg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_e3d0b7c3d23c4796955246344da15a3e~mv2.jpeg",
+        title: "Girl 27"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_846d2ac7e0ce4cf6986cf4246c8a7a43~mv2.jpeg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_846d2ac7e0ce4cf6986cf4246c8a7a43~mv2.jpeg",
+        title: "Girl 28"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_dae66c5ccef24d1faa6e754da2fb1f5e~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_dae66c5ccef24d1faa6e754da2fb1f5e~mv2.jpg",
+        title: "Girl 29"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_f85ef790c9fb4bebb1bb1e58edb63002~mv2.png/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_f85ef790c9fb4bebb1bb1e58edb63002~mv2.png",
+        title: "Girl 30"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_a90fd337d6274670aac43a44efdeaf5c~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_a90fd337d6274670aac43a44efdeaf5c~mv2.jpg",
+        title: "Girl 31"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_ed9afc07706b4b56b3d418adcf056f0e~mv2.jpeg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_ed9afc07706b4b56b3d418adcf056f0e~mv2.jpeg",
+        title: "Girl 32"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_ee75b2a2200d4a9380cf11364fc54ede~mv2.jpeg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_ee75b2a2200d4a9380cf11364fc54ede~mv2.jpeg",
+        title: "Girl 33"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_75939543dc054e809cb728213292c478~mv2.jpeg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_75939543dc054e809cb728213292c478~mv2.jpeg",
+        title: "Girl 34"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_5278d5440caa48a29db4d51dfbc678a9~mv2.jpeg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_5278d5440caa48a29db4d51dfbc678a9~mv2.jpeg",
+        title: "Girl 35"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_705a36ba436649fda7d424a3958afb3c~mv2.jpeg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_705a36ba436649fda7d424a3958afb3c~mv2.jpeg",
+        title: "Girl 36"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_2e8ed3bd11e64bbdb4f34fad4799fa65~mv2.jpeg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_2e8ed3bd11e64bbdb4f34fad4799fa65~mv2.jpeg",
+        title: "Girl 37"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_1405f480fc15445991238b2ca99c9740~mv2.jpeg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_1405f480fc15445991238b2ca99c9740~mv2.jpeg",
+        title: "Girl 38"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_a5c71e7652114d03a49dd485e849dcd4~mv2.webp/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_a5c71e7652114d03a49dd485e849dcd4~mv2.webp",
+        title: "Girl 39"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_c68fffb7e2ee4e4abf3bcb98220d43d2~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_c68fffb7e2ee4e4abf3bcb98220d43d2~mv2.jpg",
+        title: "Girl 40"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_7ab931ec3ae14d3bb9bd8e659c4ba788~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_7ab931ec3ae14d3bb9bd8e659c4ba788~mv2.jpg",
+        title: "Girl 41"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_a3e10998a00a42a8b20847a6a547dd1e~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_a3e10998a00a42a8b20847a6a547dd1e~mv2.jpg",
+        title: "Girl 42"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_b4c5181dd164458ea77056127939dbeb~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_b4c5181dd164458ea77056127939dbeb~mv2.jpg",
+        title: "Girl 43"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_99aaba1eb1854db9ba11153230b63d34~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_99aaba1eb1854db9ba11153230b63d34~mv2.jpg",
+        title: "Girl 44"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_2ca9beef355344fa85250b170c932c37~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_2ca9beef355344fa85250b170c932c37~mv2.jpg",
+        title: "Girl 45"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_7a70a98eae884297b6d3d5189733c1f5~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_7a70a98eae884297b6d3d5189733c1f5~mv2.jpg",
+        title: "Girl 46"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_700c2f73566947509ff9ffccb85c3253~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_700c2f73566947509ff9ffccb85c3253~mv2.jpg",
+        title: "Girl 47"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_bd42d396dba04d28acf51e166e0da18c~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_bd42d396dba04d28acf51e166e0da18c~mv2.jpg",
+        title: "Girl 48"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_fe562c000b544acd8491d3290af2ba35~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_fe562c000b544acd8491d3290af2ba35~mv2.jpg",
+        title: "Girl 49"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_9e5b4a2e19a14d519e3d6c574574f85d~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_9e5b4a2e19a14d519e3d6c574574f85d~mv2.jpg",
+        title: "Girl 50"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_b1ee28ceef05413398e2735c0e375204~mv2.jpg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_b1ee28ceef05413398e2735c0e375204~mv2.jpg",
+        title: "Girl 51"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_6aa41171aad24c679a29ebef1a61587e~mv2.jpeg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_6aa41171aad24c679a29ebef1a61587e~mv2.jpeg",
+        title: "Girl 52"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_04f1ac1885bd418c9a0ca6bdb7b15278~mv2.jpeg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_04f1ac1885bd418c9a0ca6bdb7b15278~mv2.jpeg",
+        title: "Girl 53"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_61f559f32a47457eae850bd35cdd0d7b~mv2.jpeg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_61f559f32a47457eae850bd35cdd0d7b~mv2.jpeg",
+        title: "Girl 54"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_2019f304ec5f4438b3539b028b0ae9b6~mv2.jpeg/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_2019f304ec5f4438b3539b028b0ae9b6~mv2.jpeg",
+        title: "Girl 55"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_369d3466dabc4b228a982a5ff1907b17~mv2.webp/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_369d3466dabc4b228a982a5ff1907b17~mv2.webp",
+        title: "Girl 56"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_323ba02d93dc491b92be12b692239609~mv2.webp/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_323ba02d93dc491b92be12b692239609~mv2.webp",
+        title: "Girl 57"
+      },
+      {
+        src: "https://static.wixstatic.com/media/d34ccd_2813ca42da5d4177a35e589c0b1ce195~mv2.webp/v1/fit/w_2400,h_3600,q_95,enc_auto/d34ccd_2813ca42da5d4177a35e589c0b1ce195~mv2.webp",
+        title: "Girl 58"
+      }
+    ];
+
+    let currentList = featuredPhotos;
+    let currentIndex = 0;
+
+    // Cover 1 opens featured album 1
+    document.getElementById('cover-btn').addEventListener('click', () => {
+      currentList = featuredPhotos;
+      openLightbox(0);
+    });
+
+    // Cover 2 opens featured album 2
+    document.getElementById('cover-btn2').addEventListener('click', () => {
+      currentList = featuredPhotos2;
+      openLightbox(0);
+    });
+
+    // Render full gallery grid
+    const grid = document.getElementById('gallery-grid');
+    allPhotos.forEach((photo, index) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `<img src="${photo.src}" alt="${photo.title}" loading="lazy">`;
+      card.addEventListener('click', () => {
+        currentList = allPhotos.map(p => p.src);
+        openLightbox(index);
+      });
+      grid.appendChild(card);
+    });
+
+    // ===== LIGHTBOX =====
+    function openLightbox(index) {
+      currentIndex = index;
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = currentList[currentIndex];
+      document.getElementById('lb-counter').textContent = (currentIndex + 1) + ' / ' + currentList.length;
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    function nextPhoto() {
+      currentIndex = (currentIndex + 1) % currentList.length;
+      document.getElementById('lightbox-img').src = currentList[currentIndex];
+      document.getElementById('lb-counter').textContent = (currentIndex + 1) + ' / ' + currentList.length;
+    }
+
+    function prevPhoto() {
+      currentIndex = (currentIndex - 1 + currentList.length) % currentList.length;
+      document.getElementById('lightbox-img').src = currentList[currentIndex];
+      document.getElementById('lb-counter').textContent = (currentIndex + 1) + ' / ' + currentList.length;
+    }
+
+    document.getElementById('lightbox').addEventListener('click', (e) => {
+      if (e.target.id === 'lightbox') closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!document.getElementById('lightbox').classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') nextPhoto();
+      if (e.key === 'ArrowLeft') prevPhoto();
+    });
+  </script>
+</body>
+</html>
